@@ -1,6 +1,6 @@
 package ru.yandex.java.course.first.lesson;
 
-import ru.yandex.java.course.first.homework.MyList;
+import ru.yandex.java.course.first.homework.MyList.MyList;
 
 import java.util.ArrayList;
 

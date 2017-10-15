@@ -1,4 +1,6 @@
-package ru.yandex.java.course.first.homework;
+package ru.yandex.java.course.first.homework.Fibonacci;
+
+import ru.yandex.java.course.first.homework.SimpleDigit;
 
 /**
  * Вывести на консоль первые n чисел последовательности Фибоначчи, где n - задается через консоль.

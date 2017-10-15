@@ -1,30 +1,24 @@
 package ru.yandex.java.course.second.homework.Queue;
 
+import ru.yandex.java.course.first.homework.MyList.MyListGeneric;
+
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-public class QueueTTL extends Queue {
-
-    protected QueueElement[] storage;
-
+public class QueueTTL extends MyListGeneric<QueueElement> {
     /** seconds */
     private int ttl;
 
-    public QueueTTL(int capacity, int ttl) {
-        super(capacity);
-        this.storage = new QueueElement[capacity];
+    public QueueTTL(int ttl) {
+        super();
         this.ttl = ttl;
     }
 
-    public void put(String element) {
-        // Если следующий элемент ставить некуда - расширяем массив
-        if (cursor < capacity) {
-            storage[cursor++] = new QueueElement(element, LocalDateTime.now());
-        } else {
-            increaseCapacity();
-            put(element);
-        }
+    public QueueTTL(int initialCapacity, int ttl) {
+        super(initialCapacity);
+        this.ttl = ttl;
     }
+
 
     public String get() {
         QueueElement result;
@@ -34,7 +28,7 @@ public class QueueTTL extends Queue {
                 throw new ArrayIndexOutOfBoundsException("Cursor cannot be smaller than 0");
             }
 
-            result = storage[cursor - 1];
+            result = (QueueElement) storage[cursor - 1];
             storage[cursor - 1] = null;
             cursor--;
 
@@ -46,13 +40,5 @@ public class QueueTTL extends Queue {
         }
 
         return result.getValue();
-    }
-
-    protected void increaseCapacity() {
-        QueueElement newStorage[] = new QueueElement[capacity * INCREMENT];
-        System.arraycopy(storage, 0, newStorage, 0, capacity);
-        capacity *= INCREMENT;
-        storage = null;
-        storage = newStorage;
     }
 }

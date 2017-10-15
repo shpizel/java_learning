@@ -1,31 +1,33 @@
-package ru.yandex.java.course.first.homework;
+package ru.yandex.java.course.first.homework.MyList;
 
-public class MyList {
+import java.util.ArrayList;
 
-    private static final int INCREMENT = 2;
-    private static final int DEFAULT_CAPACITY = 2;
+public class  MyListGeneric <T> {
 
-    private int storage[];
+    protected static final int INCREMENT = 2;
+    protected static final int DEFAULT_CAPACITY = 2;
+
+    protected Object[] storage;
 
     /**
      * Размер массива
      */
-    private int capacity;
+    protected int capacity;
 
     /**
      * Указатель на следующий элемент массива
      */
-    private int cursor = 0;
+    protected int cursor = 0;
 
-    public MyList() {
+    public MyListGeneric() {
         capacity = DEFAULT_CAPACITY;
-        storage = new int[capacity];
+        storage = new Object[capacity];
 
     }
 
-    public MyList(int initialCapacity) {
+    public MyListGeneric(int initialCapacity) {
         capacity = initialCapacity;
-        storage = new int[capacity];
+        storage = new Object[capacity];
     }
 
     /**
@@ -38,7 +40,7 @@ public class MyList {
      *
      * @param element
      */
-    public void add(int element) {
+    public void add(T element) {
         // Если следующий элемент ставить некуда - расширяем массив
         if (cursor < capacity) {
             storage[cursor++] = element;
@@ -65,7 +67,7 @@ public class MyList {
      *
      * @param element
      */
-    public void add(int element, int beforeIndex) {
+    public void add(T element, int beforeIndex) {
         //Если индекс меньше нуля или больше размера массива то ошибка
         if (beforeIndex < 0 || beforeIndex >= cursor) {
             throw new ArrayIndexOutOfBoundsException();
@@ -76,7 +78,7 @@ public class MyList {
             this.increaseCapacity();
         }
 
-        int[] newStorage = new int[capacity];
+        Object[] newStorage = new Object[capacity];
         if (beforeIndex == 0) {
             newStorage[0] = element;
             // копируем массив с начала до конца, но в новый массив вставляем с первого элемента, т.к. нулевой занят
@@ -98,8 +100,8 @@ public class MyList {
      * @param index
      * @return int
      */
-    public int get(int index) {
-        return storage[index];
+    public T get(int index) {
+        return (T) storage[index];
     }
 
     /**
@@ -112,7 +114,7 @@ public class MyList {
     }
 
     private void increaseCapacity() {
-        int newStorage[] = new int[capacity * INCREMENT];
+        Object[] newStorage = new Object[capacity * INCREMENT];
         System.arraycopy(storage, 0, newStorage, 0, capacity);
         capacity *= INCREMENT;
         storage = null;

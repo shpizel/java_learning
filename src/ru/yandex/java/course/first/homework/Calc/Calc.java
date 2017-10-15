@@ -1,4 +1,4 @@
-package ru.yandex.java.course.first.homework;
+package ru.yandex.java.course.first.homework.Calc;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
